@@ -29,6 +29,9 @@ metadata/_custom_type_script = "uid://qnck7cjv4cy7"
 unique_name_in_owner = true
 script = ExtResource("3_6t5aa")
 body = NodePath("..")
+walking_speed = 225.0
+sprinting_speed = 330.0
+air_control = 4.0
 metadata/_custom_type_script = "uid://bshe62toj41q8"
 
 [node name="CameraComponent" type="Node" parent="." node_paths=PackedStringArray("body", "camera_pivot")]

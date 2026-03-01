@@ -1,8 +1,9 @@
 class_name MovementComponent extends Node
 
 @export var body : CharacterBody3D
-@export var speed := 2.5
-@export var sprinting_speed := 5.5
+@export var walking_speed := 145.0
+@export var sprinting_speed := 220.0
+@export var air_control := 1.0
 
 var direction : Vector2
 var sprinting := false
@@ -10,13 +11,22 @@ var sprinting := false
 func tick(delta :float) -> void:
 	var normalized_direction = (body.transform.basis * Vector3(direction.x,0,direction.y)).normalized()
 	
-	body.velocity.x = normalized_direction.x * get_speed()
-	body.velocity.z = normalized_direction.z * get_speed()
+	body.velocity.x = normalized_direction.x * get_speed() * delta
+	body.velocity.z = normalized_direction.z * get_speed() * delta
+	
+	if not body.is_on_floor():
+		body.velocity.y = body.get_gravity().y * delta
 	
 	body.move_and_slide()
 
 func get_speed() -> float:
 	if sprinting:
-		return sprinting_speed
+		if body.is_on_floor():
+			return sprinting_speed
+		else:
+			return sprinting_speed/air_control
 	else:
-		return speed
+		if body.is_on_floor():
+			return walking_speed
+		else:
+			return walking_speed/air_control

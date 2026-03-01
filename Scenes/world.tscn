@@ -31,4 +31,5 @@ environment = SubResource("Environment_5a7ea")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3156095, 0)
+use_collision = true
 mesh = SubResource("BoxMesh_a02cp")
