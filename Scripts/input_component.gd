@@ -7,6 +7,8 @@ var sprint_pressed := false
 signal mouse_movement
 var mouse_event : Vector2
 
+signal interact
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
@@ -19,3 +21,6 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion  && Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		mouse_movement.emit()
 		mouse_event = event.relative * mouse_sens
+	
+	if Input.is_action_just_pressed("interact"):
+		interact.emit()

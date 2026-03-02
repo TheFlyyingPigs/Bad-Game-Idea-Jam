@@ -3,6 +3,7 @@ extends CharacterBody3D
 @onready var input_component = %InputComponent
 @onready var movement_component = %MovementComponent
 @onready var camera_component = %CameraComponent
+@onready var interact_component = %InteractComponent
 
 
 func _physics_process(delta: float) -> void:
@@ -17,3 +18,6 @@ func _physics_process(delta: float) -> void:
 
 func on_mouse_movement() -> void:
 	camera_component.tick(input_component.mouse_event)
+
+func on_interact() -> void:
+	interact_component.try_interact()

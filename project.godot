@@ -53,6 +53,11 @@ interact={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Base"
+3d_physics/layer_2="Interactable"
+
 [physics]
 
 3d/default_gravity=500.0
