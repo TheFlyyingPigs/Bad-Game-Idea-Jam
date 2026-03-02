@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpvggwnhs5wgj"]
+[gd_scene load_steps=7 format=3 uid="uid://dpvggwnhs5wgj"]
 
 [ext_resource type="PackedScene" uid="uid://bftqq2syj7664" path="res://Scenes/player.tscn" id="1_a02cp"]
 
@@ -18,6 +18,9 @@ glow_enabled = true
 [sub_resource type="BoxMesh" id="BoxMesh_a02cp"]
 size = Vector3(7.91, 1, 8.575)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a02cp"]
+albedo_color = Color(0.5724594, 0.42118913, 0.25229722, 1)
+
 [node name="world" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -33,3 +36,4 @@ environment = SubResource("Environment_5a7ea")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3156095, 0)
 use_collision = true
 mesh = SubResource("BoxMesh_a02cp")
+material = SubResource("StandardMaterial3D_a02cp")
