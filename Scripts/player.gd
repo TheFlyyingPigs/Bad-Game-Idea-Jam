@@ -17,6 +17,7 @@ func _physics_process(delta: float) -> void:
 	# MOVE
 	movement_component.tick(delta)
 	
+
 # MOUSE MOVEMENT
 func on_mouse_movement() -> void:
 	camera_component.tick(input_component.mouse_event)

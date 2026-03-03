@@ -39,11 +39,12 @@ sprinting_speed = 330.0
 air_control = 4.0
 metadata/_custom_type_script = "uid://bshe62toj41q8"
 
-[node name="CameraComponent" type="Node" parent="." node_paths=PackedStringArray("body", "camera_pivot")]
+[node name="CameraComponent" type="Node" parent="." node_paths=PackedStringArray("body", "camera_pivot", "camera")]
 unique_name_in_owner = true
 script = ExtResource("4_vgqql")
 body = NodePath("..")
 camera_pivot = NodePath("../Pivot")
+camera = NodePath("../Pivot/Camera3D")
 metadata/_custom_type_script = "uid://fyfst4gf418a"
 
 [node name="InteractComponent" type="Node" parent="." node_paths=PackedStringArray("raycast")]

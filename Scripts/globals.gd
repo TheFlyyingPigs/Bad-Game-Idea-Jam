@@ -14,3 +14,6 @@ func add_item(type : ItemType):
 	print("Picked up " +str(type))
 	# ADD GUI INDICATION THAT THIS HAPPENED
 	
+
+func _ready() -> void:
+	randomize()

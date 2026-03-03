@@ -13,15 +13,15 @@ config_version=5
 config/name="Bad Game Idea Jam"
 run/main_scene="uid://dpvggwnhs5wgj"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
 
 [autoload]
 
 Globals="*res://Scripts/globals.gd"
+Gui="*res://Scripts/gui_handler.gd"
 
 [display]
 
-window/size/mode=3
+window/size/mode=4
 
 [input]
 

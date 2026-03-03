@@ -14,4 +14,5 @@ func _ready() -> void:
 func interact():
 	Globals.add_item(deposit_type.resource_type)
 	$AnimationPlayer.play("break")
-	
+	Gui.screen_shake(0.45,0.5)
+	Gui.alert(deposit_type.resource_type)

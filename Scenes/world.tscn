@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpvggwnhs5wgj"]
+[gd_scene load_steps=10 format=3 uid="uid://dpvggwnhs5wgj"]
 
 [ext_resource type="PackedScene" uid="uid://bftqq2syj7664" path="res://Scenes/player.tscn" id="1_a02cp"]
 [ext_resource type="PackedScene" uid="uid://dum1yujii1ubv" path="res://ResourceDeposits/resource_deposit.tscn" id="2_go701"]
 [ext_resource type="Resource" uid="uid://de5575og4qhkh" path="res://ResourceDeposits/WaterDeposit.tres" id="3_5a7ea"]
+[ext_resource type="PackedScene" uid="uid://bwxxn76xj3ic0" path="res://Scenes/gui.tscn" id="4_8j60k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a02cp"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -43,3 +44,9 @@ material = SubResource("StandardMaterial3D_a02cp")
 [node name="ResourceDeposit" parent="." instance=ExtResource("2_go701")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.266306)
 deposit_type = ExtResource("3_5a7ea")
+
+[node name="ResourceDeposit2" parent="." instance=ExtResource("2_go701")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.126707, 0, -3.2286677)
+deposit_type = ExtResource("3_5a7ea")
+
+[node name="Gui" parent="." instance=ExtResource("4_8j60k")]
