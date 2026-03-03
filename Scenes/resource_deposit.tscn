@@ -1,0 +1,125 @@
+[gd_scene load_steps=12 format=3 uid="uid://dum1yujii1ubv"]
+
+[ext_resource type="Script" uid="uid://2flmqe8likxl" path="res://Scripts/resource_deposit.gd" id="1_iuuqq"]
+[ext_resource type="Script" uid="uid://sigyu5ilsnic" path="res://Scripts/interactable_component.gd" id="1_lccbr"]
+[ext_resource type="Material" uid="uid://t7tq7y4mpui" path="res://DepositParticle.tres" id="2_iuuqq"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_equij"]
+radius = 1.2267792
+
+[sub_resource type="SphereMesh" id="SphereMesh_1mrhp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gesg6"]
+albedo_color = Color(0.46229059, 0.46229059, 0.46229059, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iuuqq"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_28eni"]
+material = SubResource("StandardMaterial3D_iuuqq")
+
+[sub_resource type="Animation" id="Animation_mx1p0"]
+resource_name = "break"
+length = 0.6005
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.06666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666668, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(2.4136655, 2.3703485, 2.3272674), Vector3(2.609, 2.561, 2.515), Vector3(0, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.56666666),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_p601p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.4136655, 2.3703485, 2.3272674)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8542l"]
+_data = {
+&"RESET": SubResource("Animation_p601p"),
+&"break": SubResource("Animation_mx1p0")
+}
+
+[node name="ResourceDeposit" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_iuuqq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_equij")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.4136655, 0, 0, 0, 2.3703485, 0, 0, 0, 2.3272674, 0, 0, 0)
+mesh = SubResource("SphereMesh_1mrhp")
+surface_material_override/0 = SubResource("StandardMaterial3D_gesg6")
+
+[node name="InteractableComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_lccbr")
+metadata/_custom_type_script = "uid://sigyu5ilsnic"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 20
+lifetime = 0.53
+one_shot = true
+explosiveness = 0.65
+randomness = 1.0
+process_material = ExtResource("2_iuuqq")
+draw_pass_1 = SubResource("SphereMesh_28eni")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8542l")
+}

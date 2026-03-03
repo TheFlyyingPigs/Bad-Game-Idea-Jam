@@ -11,5 +11,5 @@ var item_count := []
 
 func add_item(type : ItemType):
 	item_count.append(type)
-	print("Picked up s%" %type)
+	print("Picked up " +str(type))
 	# ADD GUI INDICATION THAT THIS HAPPENED

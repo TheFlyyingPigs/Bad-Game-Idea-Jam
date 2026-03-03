@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="DepositType" load_steps=4 format=3 uid="uid://de5575og4qhkh"]
+
+[ext_resource type="Script" uid="uid://drfc2dahc1go0" path="res://ResourceDeposits/DepositType.gd" id="1_10gsm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10gsm"]
+albedo_color = Color(0.10123358, 0.6043704, 0.7957899, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_seto0"]
+material = SubResource("StandardMaterial3D_10gsm")
+
+[resource]
+script = ExtResource("1_10gsm")
+mesh = SubResource("PlaneMesh_seto0")
+resource_type = 1
+particle_color = Color(0.14425087, 0.6106728, 0.8210763, 1)
+metadata/_custom_type_script = "uid://drfc2dahc1go0"

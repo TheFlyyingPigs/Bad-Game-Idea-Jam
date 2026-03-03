@@ -6,6 +6,7 @@ var body : StaticBody3D
 
 func try_interact():
 	if raycast.is_colliding():
-		body = raycast.get_collider()
-		if body.interactable_component != null:
-			body.interactable_component.interact()
+		if raycast.get_collider() != null:
+			body = raycast.get_collider()
+			if body.interactable_component != null:
+				body.interact()

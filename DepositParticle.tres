@@ -1,0 +1,21 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://t7tq7y4mpui"]
+
+[sub_resource type="Curve" id="Curve_odwmw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.5357018, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dtwkb"]
+curve = SubResource("Curve_odwmw")
+
+[resource]
+lifetime_randomness = 0.35
+angle_min = -296.5
+angle_max = -59.29999
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 8.0
+initial_velocity_max = 16.0
+gravity = Vector3(0, -26.775, 0)
+scale_min = 0.65
+scale_max = 1.15
+scale_curve = SubResource("CurveTexture_dtwkb")
+color = Color(0.39543647, 0.269971, 0.20906326, 1)
