@@ -5,6 +5,7 @@ extends CharacterBody3D
 @onready var camera_component = %CameraComponent
 @onready var interact_component = %InteractComponent
 
+var can_interact := true
 
 func _physics_process(delta: float) -> void:
 	# UPDATE INPUTS
@@ -20,4 +21,10 @@ func on_mouse_movement() -> void:
 	camera_component.tick(input_component.mouse_event)
 
 func on_interact() -> void:
-	interact_component.try_interact()
+	if can_interact:
+		interact_component.try_interact()
+		$InteractTimer.start()
+		can_interact = false
+
+func _on_interact_timer_timeout() -> void:
+	can_interact = true

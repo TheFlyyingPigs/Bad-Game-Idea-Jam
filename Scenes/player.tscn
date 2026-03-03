@@ -52,5 +52,10 @@ script = ExtResource("5_fkybt")
 raycast = NodePath("../Pivot/RayCast3D")
 metadata/_custom_type_script = "uid://b7q3l56ryo8qg"
 
+[node name="InteractTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="interact" from="InputComponent" to="." method="on_interact"]
 [connection signal="mouse_movement" from="InputComponent" to="." method="on_mouse_movement"]
+[connection signal="timeout" from="InteractTimer" to="." method="_on_interact_timer_timeout"]

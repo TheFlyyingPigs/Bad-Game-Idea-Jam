@@ -5,6 +5,7 @@ extends StaticBody3D
 @onready var interactable_component := %InteractableComponent
 
 func _ready() -> void:
+	$GPUParticles3D.emitting = false
 	var material = StandardMaterial3D.new()
 	material.albedo_color = deposit_type.particle_color
 	$GPUParticles3D.draw_pass_1.surface_set_material(0, material)
