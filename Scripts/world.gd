@@ -1,7 +1,7 @@
 extends Node3D
 
+@onready var outside = load("res://Scenes/outside_world.tscn")
 
 func _ready() -> void:
-	var outside = load("res://Scenes/outside_world.tscn")
 	Gui.show_screen(Gui.ScreenType.MAIN_MENU)
-	get_tree().current_scene = outside.instantiate()
+	Globals.load_scene(outside)

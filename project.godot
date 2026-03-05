@@ -61,7 +61,6 @@ interact={
 
 3d_physics/layer_1="Base"
 3d_physics/layer_2="Interactable"
-3d_physics/layer_3="Player"
 
 [physics]
 

@@ -8,12 +8,12 @@
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_5a7ea"]
+[sub_resource type="Sky" id="Sky_go701"]
 sky_material = SubResource("ProceduralSkyMaterial_a02cp")
 
 [sub_resource type="Environment" id="Environment_5a7ea"]
 background_mode = 2
-sky = SubResource("Sky_5a7ea")
+sky = SubResource("Sky_go701")
 tonemap_mode = 2
 glow_enabled = true
 
@@ -32,16 +32,3 @@ environment = SubResource("Environment_5a7ea")
 
 [node name="Gui" parent="." instance=ExtResource("4_8j60k")]
 process_mode = 3
-
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.0045252)
-use_collision = true
-
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1089478, 0)
-size = Vector3(6.0739746, 5.2178955, 5.4052734)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1089478, 0.03274536)
-operation = 2
-size = Vector3(5.5231934, 4.8095703, 5.213806)
