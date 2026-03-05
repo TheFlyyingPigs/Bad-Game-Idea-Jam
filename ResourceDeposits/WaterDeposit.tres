@@ -7,8 +7,6 @@ albedo_color = Color(0.10123358, 0.6043704, 0.7957899, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_seto0"]
 material = SubResource("StandardMaterial3D_10gsm")
-size = Vector2(1.2, 1.2)
-center_offset = Vector3(0, -0.2, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_seto0"]
 albedo_color = Color(0.14509805, 0.6117647, 0.81960785, 1)
