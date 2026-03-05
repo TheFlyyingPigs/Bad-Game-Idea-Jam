@@ -1,13 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://cklblqchlc32c"]
+[gd_scene load_steps=15 format=3 uid="uid://cklblqchlc32c"]
 
 [ext_resource type="PackedScene" uid="uid://dum1yujii1ubv" path="res://ResourceDeposits/resource_deposit.tscn" id="1_l7un5"]
 [ext_resource type="Resource" uid="uid://de5575og4qhkh" path="res://ResourceDeposits/WaterDeposit.tres" id="2_xf1hd"]
+[ext_resource type="Script" uid="uid://dr76sfqsvj45c" path="res://Scripts/scene_transition.gd" id="3_l60d6"]
+[ext_resource type="PackedScene" uid="uid://dpvggwnhs5wgj" path="res://Scenes/world.tscn" id="4_patlc"]
+[ext_resource type="PackedScene" uid="uid://bftqq2syj7664" path="res://Scenes/player.tscn" id="5_patlc"]
+[ext_resource type="PackedScene" uid="uid://bwxxn76xj3ic0" path="res://Scenes/gui.tscn" id="6_g4qxf"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_l60d6"]
 size = Vector3(65, 1, 65)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cjcjx"]
 albedo_color = Color(0.5724594, 0.42118913, 0.25229722, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cjcjx"]
+size = Vector3(1.6445313, 2.7886963, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_patlc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4qxf"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_q17te"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_go701"]
+sky_material = SubResource("ProceduralSkyMaterial_q17te")
+
+[sub_resource type="Environment" id="Environment_22iqp"]
+background_mode = 2
+sky = SubResource("Sky_go701")
+tonemap_mode = 2
+glow_enabled = true
 
 [node name="outside_world" type="Node3D"]
 
@@ -18,11 +43,11 @@ mesh = SubResource("BoxMesh_l60d6")
 material = SubResource("StandardMaterial3D_cjcjx")
 
 [node name="ResourceDeposit" parent="." instance=ExtResource("1_l7un5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.549507)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7905903, 0, -14.999024)
 deposit_type = ExtResource("2_xf1hd")
 
 [node name="ResourceDeposit2" parent="." instance=ExtResource("1_l7un5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.699204, 0, -7.3473907)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.607217, 0, -7.4269676)
 deposit_type = ExtResource("2_xf1hd")
 
 [node name="ResourceDeposit3" parent="." instance=ExtResource("1_l7un5")]
@@ -34,9 +59,43 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.986619, 0, 5.6263137)
 deposit_type = ExtResource("2_xf1hd")
 
 [node name="ResourceDeposit5" parent="." instance=ExtResource("1_l7un5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2734642, 0, 9.348333)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.423021, 0, -13.726736)
 deposit_type = ExtResource("2_xf1hd")
 
 [node name="ResourceDeposit6" parent="." instance=ExtResource("1_l7un5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.917433, 0, 5.971282)
 deposit_type = ExtResource("2_xf1hd")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7313666, 5.9647455)
+size = Vector3(6.0739746, 5.2178955, 5.4052734)
+
+[node name="SceneTransitioner" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("3_l60d6")
+connected_scene = ExtResource("4_patlc")
+metadata/_custom_type_script = "uid://dr76sfqsvj45c"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SceneTransitioner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60830355, 3.370196)
+shape = SubResource("BoxShape3D_cjcjx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SceneTransitioner"]
+transform = Transform3D(1.7034638, 0, 0, 0, 3.526232, 0, 0, 0, 1, 0, 0.22663128, 3.3825986)
+mesh = SubResource("BoxMesh_patlc")
+surface_material_override/0 = SubResource("StandardMaterial3D_g4qxf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_22iqp")
+
+[node name="Player" parent="." instance=ExtResource("5_patlc")]
+
+[node name="Gui" parent="." instance=ExtResource("6_g4qxf")]
+process_mode = 3
+
+[connection signal="body_entered" from="SceneTransitioner" to="SceneTransitioner" method="_on_body_entered"]

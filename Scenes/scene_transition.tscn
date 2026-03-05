@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmrc0mjg6fx5p"]
+
+[ext_resource type="Script" uid="uid://dr76sfqsvj45c" path="res://Scripts/scene_transition.gd" id="1_crfs3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xs6k6"]
+size = Vector3(1, 3.503662, 2.149475)
+
+[sub_resource type="BoxMesh" id="BoxMesh_crfs3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xs6k6"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="SceneTransition" type="Area3D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_crfs3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.251831, -0.018951416)
+shape = SubResource("BoxShape3D_xs6k6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 3.455606, 0, 0, 0, 2.0958276, 0, 1.2371392, 0)
+mesh = SubResource("BoxMesh_crfs3")
+surface_material_override/0 = SubResource("StandardMaterial3D_xs6k6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
