@@ -10,14 +10,19 @@ config_version=5
 
 [application]
 
-config/name="Bad Game Idea Jam"
+config/name="The World Tree"
 run/main_scene="uid://b04xakd0pv2cx"
 config/features=PackedStringArray("4.5", "Forward Plus")
+boot_splash/show_image=false
 
 [autoload]
 
 Globals="*res://Scripts/globals.gd"
 Gui="*res://Scripts/gui_handler.gd"
+
+[debug]
+
+gdscript/warnings/unused_variable=0
 
 [display]
 

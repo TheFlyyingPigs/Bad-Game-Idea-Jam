@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DepositType" load_steps=2 format=3 uid="uid://c5f5eu5tud0dj"]
+
+[ext_resource type="Script" uid="uid://drfc2dahc1go0" path="res://ResourceDeposits/DepositType.gd" id="1_363mk"]
+
+[resource]
+script = ExtResource("1_363mk")
+metadata/_custom_type_script = "uid://drfc2dahc1go0"

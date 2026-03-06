@@ -4,7 +4,7 @@ extends Node
 enum ItemType {
 	WATER,
 	LIGHT,
-	SCRAP_METAL
+	DIRT,
 }
 
 var inventory := []

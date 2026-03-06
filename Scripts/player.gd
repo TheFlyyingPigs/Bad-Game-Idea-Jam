@@ -5,8 +5,11 @@ extends CharacterBody3D
 @onready var camera_component = %CameraComponent
 @onready var interact_component = %InteractComponent
 @onready var camera_anims := $CameraAnims
+@onready var anim_pivot = $Pivot/AnimPivot
 
 var can_interact := true
+
+const MAX_SWAY = 2.5
 
 func _physics_process(delta: float) -> void:
 	# UPDATE INPUTSw
@@ -18,6 +21,7 @@ func _physics_process(delta: float) -> void:
 	# MOVE
 	movement_component.tick(delta)
 	
+	# CAMERA BOB
 	if movement_component.direction == Vector2.ZERO:
 		camera_anims.current_animation = "idle"
 	else:
@@ -25,7 +29,15 @@ func _physics_process(delta: float) -> void:
 			camera_anims.current_animation = "walking"
 		else:
 			camera_anims.current_animation = "running"
-
+	
+	# CAMERA SWAY
+	if input_component.move_dir.x > 0:
+		anim_pivot.rotation.z = lerp_angle(anim_pivot.rotation.z,deg_to_rad(-MAX_SWAY), 0.035)
+	elif input_component.move_dir.x < 0:
+		anim_pivot.rotation.z = lerp_angle(anim_pivot.rotation.z,deg_to_rad(MAX_SWAY), 0.035)
+	else:
+		anim_pivot.rotation.z = lerp_angle(anim_pivot.rotation.z,deg_to_rad(0), 0.035)
+	
 # MOUSE MOVEMENT
 func on_mouse_movement() -> void:
 	camera_component.tick(input_component.mouse_event)
