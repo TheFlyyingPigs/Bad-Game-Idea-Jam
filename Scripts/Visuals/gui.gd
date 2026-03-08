@@ -12,6 +12,17 @@ func update_timer_bar():
 	timer_bar.max_value = Globals.timer_length
 	timer_bar.value = Globals.time_left
 
+func fade_out():
+	'
+	fades screen to black
+	'
+	%AnimationPlayer.play("fade_out")
+
+func fade_in():
+	'
+	fades screen from black
+	'
+	%AnimationPlayer.play("fade_in")
 
 func alert(type : Globals.ItemType):
 	'
@@ -31,6 +42,11 @@ func alert(type : Globals.ItemType):
 
 var current_screen : Control
 
+@onready var crosshair := %Crosshair #FIXME Variables not found every time the function is run!
+@onready var menus := %Menus
+@onready var pause_menu := %PauseMenu
+@onready var upgrade_menu
+
 func show_screen(type : Gui.ScreenType):
 	'
 	shows a screen
@@ -38,11 +54,6 @@ func show_screen(type : Gui.ScreenType):
 	arguments: 
 		type: the screen to show
 	'
-	var crosshair := %Crosshair #FIXME Variables not found every time the function is run!
-	var menus := %Menus
-	var pause_menu := %PauseMenu
-	var main_menu := %MainMenu
-	var upgrade_menu
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	menus.visible = true
 	crosshair.visible = false
@@ -51,21 +62,15 @@ func show_screen(type : Gui.ScreenType):
 		Gui.ScreenType.PAUSE: 
 			pause_menu.visible = true
 			current_screen = pause_menu
-		Gui.ScreenType.MAIN_MENU: 
-			main_menu.visible = true
-			current_screen = main_menu
 		Gui.ScreenType.UPGRADE: 
 			upgrade_menu.visible = true
 			current_screen = upgrade_menu
-	
 
 
 func resume() -> void:
 	'
 	unpauses the game
 	'
-	var crosshair := %Crosshair
-	var menus := %Menus
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	get_tree().paused = false

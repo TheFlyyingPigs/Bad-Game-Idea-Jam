@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://b04xakd0pv2cx"]
+[gd_scene load_steps=6 format=3 uid="uid://b04xakd0pv2cx"]
 
 [ext_resource type="PackedScene" uid="uid://bftqq2syj7664" path="res://Scenes/player.tscn" id="1_mntln"]
-[ext_resource type="PackedScene" uid="uid://bwxxn76xj3ic0" path="res://Scenes/gui.tscn" id="2_5l7jk"]
 [ext_resource type="PackedScene" uid="uid://csoau7mpja14x" path="res://Scenes/level_transitioner.tscn" id="3_jgd3w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i5bjo"]
@@ -28,9 +27,6 @@ environment = SubResource("Environment_yimsw")
 
 [node name="Player" parent="." instance=ExtResource("1_mntln")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.6604302)
-
-[node name="Gui" parent="." instance=ExtResource("2_5l7jk")]
-process_mode = 3
 
 [node name="LevelTransitioner" parent="." instance=ExtResource("3_jgd3w")]
 connected_level = 1

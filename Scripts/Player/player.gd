@@ -78,3 +78,10 @@ func outside_timer_run():
 	passes outside_timer_run() to the timer_component
 	'
 	timer_component.outside_timer_run()
+
+
+func died() -> void:
+	'
+	runs the dying anim
+	'
+	camera_anims.play("die")

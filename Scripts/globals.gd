@@ -21,8 +21,10 @@ func add_item(type : ItemType):
 
 enum LevelID{ # CONTAINS ALL SCENES THAT CAN BE SWITCHED TO
 	INSIDE,
-	OUTSIDE
+	OUTSIDE,
+	MAIN_MENU
 }
+
 
 var current_scene = null
 func _ready() -> void:
@@ -32,16 +34,24 @@ func _ready() -> void:
 	- shows main menu
 	- randomizes seed that random numbers use to generate
 	'
+	get_tree().scene_changed.connect(done_loading)
 	var root = get_tree().root
 	current_scene = root.get_child(root.get_child_count()-1)
 	
-	Gui.show_screen(Gui.ScreenType.MAIN_MENU)
 	randomize()
+	
 
+var loaded := false
+
+func done_loading():
+	'
+	makes sure that the scene is done loading after being switched
+	'
+	loaded = true
 
 func switch_level(id:LevelID):
 	call_deferred("_deferred_switch_scene",id)
-	
+	loaded = false
 
 func _deferred_switch_scene(id):
 	'
@@ -50,6 +60,7 @@ func _deferred_switch_scene(id):
 	Arguments:
 		id: the id of the level being switched to
 	'
+	
 	current_scene.free()
 	var new_scene
 	match id:
@@ -57,9 +68,14 @@ func _deferred_switch_scene(id):
 		LevelID.OUTSIDE: 
 			new_scene = load("res://Scenes/outside_world.tscn")
 			outside_timer_run()
+		LevelID.MAIN_MENU:
+			new_scene = load("res://Scenes/main_menu.tscn")
 	current_scene = new_scene.instantiate()
 	get_tree().root.add_child(current_scene)
 	get_tree().current_scene = current_scene
+	Gui.scene_switched()
+	await get_tree().create_timer(0.05).timeout
+	loaded = true
 
 # TIMER VARIABLES
 var timer_length := 360 # Written in seconds

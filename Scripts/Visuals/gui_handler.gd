@@ -11,18 +11,38 @@ enum ScreenType{ # CONTAINS ALL TYPES OF MENUS/SCREENS
 	UPGRADE
 }
 
+
+
 func alert(type):
-	var gui := get_tree().get_first_node_in_group("gui")
-	gui.alert(type)
+	if Globals.loaded:
+		gui.alert(type)
 
 func show_screen(type):
-	var gui := get_tree().get_first_node_in_group("gui")
-	gui.show_screen(type)
+	if Globals.loaded:
+		gui.show_screen(type)
 
 func screen_shake(intensity, time):
-	var camera :CameraComponent= get_tree().get_first_node_in_group("camera_comp")
-	camera.screen_shake(intensity,time)
+	if Globals.loaded:
+		camera.screen_shake(intensity,time)
 
 func update_timer_bar():
-	var gui := get_tree().get_first_node_in_group("gui")
-	gui.update_timer_bar()
+	if Globals.loaded:
+		gui.update_timer_bar()
+
+func fade_out():
+	if Globals.loaded:
+		gui.fade_out()
+
+func fade_in():
+	if Globals.loaded:
+		gui.fade_in()
+
+@onready var gui 
+@onready var camera 
+
+func scene_switched():
+	'
+	set the variables every time the scene is switched
+	'
+	gui = get_tree().get_first_node_in_group("gui")
+	camera = get_tree().get_first_node_in_group("camera_comp")

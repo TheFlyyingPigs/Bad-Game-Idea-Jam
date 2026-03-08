@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwxxn76xj3ic0"]
+[gd_scene load_steps=10 format=3 uid="uid://bwxxn76xj3ic0"]
 
 [ext_resource type="Script" uid="uid://dwsao5hvj6lcw" path="res://Scripts/Visuals/gui.gd" id="1_qyd3e"]
 [ext_resource type="Texture2D" uid="uid://dock0603xykxm" path="res://Assets/Textures/GUI/spr_TimerProgressBar.png" id="2_bm56d"]
@@ -48,6 +48,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/BlackScreen:color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_m6o0h"]
 resource_name = "alert"
@@ -89,10 +101,44 @@ tracks/2/keys = {
 "values": [0.0, 1.0, 1.0, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_bm56d"]
+resource_name = "fade_to_black"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/BlackScreen:color:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_n5m23"]
+resource_name = "fade_in"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/BlackScreen:color:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3w84o"]
 _data = {
 &"RESET": SubResource("Animation_8kag3"),
-&"alert": SubResource("Animation_m6o0h")
+&"alert": SubResource("Animation_m6o0h"),
+&"fade_in": SubResource("Animation_n5m23"),
+&"fade_out": SubResource("Animation_bm56d")
 }
 
 [node name="Gui" type="Control" groups=["gui"]]
@@ -105,6 +151,7 @@ grow_vertical = 2
 script = ExtResource("1_qyd3e")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 
 [node name="TimerProgress" type="TextureProgressBar" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -205,49 +252,14 @@ layout_mode = 2
 text = "Quit
 "
 
-[node name="MainMenu" type="Control" parent="CanvasLayer/Menus"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
+[node name="BlackScreen" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Menus/MainMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.1639036, 0.3246505, 0.17414343, 1)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Menus/MainMenu"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.43055555
-anchor_top = 0.28549382
-anchor_right = 0.5763889
-anchor_bottom = 0.72993827
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 25
-alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="MainPlay" type="Button" parent="CanvasLayer/Menus/MainMenu/VBoxContainer"]
-layout_mode = 2
-text = "Play
-"
-
-[node name="MainQuit" type="Button" parent="CanvasLayer/Menus/MainMenu/VBoxContainer"]
-layout_mode = 2
-text = "Quit
-"
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
 
 [connection signal="pressed" from="CanvasLayer/Menus/PauseMenu/VBoxContainer/PauseResume" to="." method="resume"]
 [connection signal="pressed" from="CanvasLayer/Menus/PauseMenu/VBoxContainer/PauseQuit" to="." method="quit"]
-[connection signal="pressed" from="CanvasLayer/Menus/MainMenu/VBoxContainer/MainPlay" to="." method="resume"]
-[connection signal="pressed" from="CanvasLayer/Menus/MainMenu/VBoxContainer/MainQuit" to="." method="quit"]
